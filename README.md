@@ -1,9 +1,9 @@
-# FacebookAppEvents.Mobile
+# Plugin.Maui.FacebookAppEvents
 
 <div align="center">
 
-[![NuGet](https://img.shields.io/nuget/v/FacebookAppEvents.Mobile.svg)](https://www.nuget.org/packages/FacebookAppEvents.Mobile/)
-[![Downloads](https://img.shields.io/nuget/dt/FacebookAppEvents.Mobile)](https://www.nuget.org/packages/FacebookAppEvents.Mobile/)
+[![NuGet](https://img.shields.io/nuget/v/Plugin.Maui.FacebookAppEvents.svg)](https://www.nuget.org/packages/Plugin.Maui.FacebookAppEvents/)
+[![Downloads](https://img.shields.io/nuget/dt/Plugin.Maui.FacebookAppEvents)](https://www.nuget.org/packages/Plugin.Maui.FacebookAppEvents/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![.NET](https://img.shields.io/badge/.NET-6.0+-blue.svg)](https://dotnet.microsoft.com/download)
 
@@ -35,7 +35,7 @@ This library does exactly one thing: sends Facebook App Events from your .NET MA
 ## Installation
 
 ```
-dotnet add package FacebookAppEvents.Mobile
+dotnet add package Plugin.Maui.FacebookAppEvents
 ```
 
 ## Setup
