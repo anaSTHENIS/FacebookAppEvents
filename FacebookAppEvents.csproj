@@ -8,7 +8,7 @@
 
 		<!-- NuGet Package Metadata -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageId>FacebookAppEvents.Mobile</PackageId>
+		<PackageId>Plugin.Maui.FacebookAppEvents</PackageId>
 		<Version>1.0.0</Version>
 		<Authors>anaSTHENIS</Authors>
 		<Company>anaSTHENIS</Company>
