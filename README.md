@@ -229,9 +229,9 @@ No sketchy stuff, no personal data without consent.
 Found a bug? Want to add something? Cool, but let's keep it simple. This library intentionally does one thing well rather than trying to be everything to everyone.
 
 1. Fork it
-2. Create your feature branch (`git checkout -b fix-something-broken`)
-3. Commit your changes (`git commit -am 'Fix the thing'`)
-4. Push to the branch (`git push origin fix-something-broken`)
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
 5. Create a Pull Request
 
 ## License
