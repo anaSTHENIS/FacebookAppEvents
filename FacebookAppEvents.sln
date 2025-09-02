@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookAppEvents", "FacebookAppEvents.csproj", "{EE455E2F-988E-4220-8B74-B0B4544792FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE455E2F-988E-4220-8B74-B0B4544792FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE455E2F-988E-4220-8B74-B0B4544792FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE455E2F-988E-4220-8B74-B0B4544792FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE455E2F-988E-4220-8B74-B0B4544792FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5029CA39-DD4C-45C2-AC95-B995821E0393}
+	EndGlobalSection
+EndGlobal

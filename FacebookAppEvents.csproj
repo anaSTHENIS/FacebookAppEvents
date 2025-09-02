@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- NuGet Package Metadata -->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>FacebookAppEvents.Mobile</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>anaSTHENIS</Authors>
+		<Company>anaSTHENIS</Company>
+		<Title>Facebook App Events for .NET MAUI</Title>
+		<Description>A complete .NET MAUI library for Facebook App Events with built-in advertising ID services for iOS and Android. Includes IDFA/GAID handling with proper privacy compliance.</Description>
+		<Summary>Facebook App Events tracking library for .NET MAUI iOS and Android apps with automatic advertiser ID management.</Summary>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/yourgithub/FacebookAppEvents</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>Facebook;App Events;iOS;Android;MAUI;Analytics;IDFA;GAID;Tracking;Privacy</PackageTags>
+		<RepositoryUrl>https://github.com/yourgithub/FacebookAppEvents</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Copyright>Copyright © 2025 anaSTHENIS</Copyright>
+		<PackageReleaseNotes>Initial release with iOS IDFA and Android GAID support, full Facebook App Events API integration.</PackageReleaseNotes>
+
+		<!-- Documentation -->
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.101" />
+	</ItemGroup>
+
+	<!-- Android-specific dependencies -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+		<PackageReference Include="Xamarin.GooglePlayServices.Ads.Identifier" Version="118.2.0.4" />
+	</ItemGroup>
+
+	<!-- Include package assets -->
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<None Include="nugetfb.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+</Project>
