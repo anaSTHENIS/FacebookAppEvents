@@ -1,60 +1,118 @@
-﻿FacebookAppEvents.Mobile
-<div align="center">
-[![NuGet](https://img.shields.io/nuget/v/FacebookAppEvents.p Events shouldn't be this hard*
+# Plugin.Maui.FacebookAppEvents
 
-Get Started - Examples - Troubleshooting
+<div align="center">
+
+[![NuGet](https://img.shields.io/nuget/v/Plugin.Maui.FacebookAppEvents.svg)](https://www.nuget.org/packages/Plugin.Maui.FacebookAppEvents/)
+[![Downloads](https://img.shields.io/nuget/dt/Plugin.Maui.FacebookAppEvents)](https://www.nuget.org/packages/Plugin.Maui.FacebookAppEvents/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![.NET](https://img.shields.io/badge/.NET-6.0+-blue.svg)](https://dotnet.microsoft.com/download)
+
+*Because implementing Facebook App Events shouldn't be this hard*
+
+[Get Started](#installation) • [Examples](#examples) • [Troubleshooting](#troubleshooting)
 
 </div>
-The Problem
+
+---
+
+## The Problem
+
 You want to track app events in Facebook. You install their SDK. It's 50MB, breaks your build, and requires 30 lines of setup code just to track a simple purchase. There's got to be a better way.
 
-The Solution
+## The Solution
+
 This library does exactly one thing: sends Facebook App Events from your .NET MAUI app. No bloat, no complexity, no headaches. It handles the annoying parts (getting IDFA/GAID, privacy permissions) so you can focus on what matters.
 
-What You Get
-Works with iOS and Android MAUI apps
+## What You Get
 
-Handles advertising IDs automatically (IDFA on iOS, GAID on Android)
+- Works with iOS and Android MAUI apps
+- Handles advertising IDs automatically (IDFA on iOS, GAID on Android)
+- Respects user privacy (ATT on iOS 14+, LAT on Android)
+- Simple methods for common events (purchase, add to cart, login, etc.)
+- Fully customizable when you need it
+- Actually documented
 
-Respects user privacy (ATT on iOS 14+, LAT on Android)
+## Installation
 
-Simple methods for common events (purchase, add to cart, login, etc.)
+```
+dotnet add package Plugin.Maui.FacebookAppEvents
+```
 
-Fully customizable when you need it
+## Setup
 
-Actually documented
+First, get your Facebook App ID and Client Token from [developers.facebook.com](https://developers.facebook.com/).
 
-Installation
-bash
-dotnet add package FacebookAppEvents.Mobile
-Setup
-First, get your Facebook App ID and Client Token from developers.facebook.com.
-
-Android
-Add this to AndroidManifest.xml:
-
-xml
+### Android
+Add this to `AndroidManifest.xml`:
+```
 <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-iOS
-Add this to Info.plist:
+```
 
-xml
+### iOS
+Add this to `Info.plist`:
+```
 <key>NSUserTrackingUsageDescription</key>
 <string>This helps us show you relevant ads and improve the app.</string>
-Register the Services
-In MauiProgram.cs:
+```
 
-csharp
+## Quick Setup (Recommended)
+
+The easiest way to get started - just one line in your `MauiProgram.cs`:
+
+```
+public static MauiApp CreateMauiApp()
+{
+    var builder = MauiApp.CreateBuilder();
+    builder
+        .UseMauiApp<App>()
+        .ConfigureFonts(fonts =>
+        {
+            fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+        })
+        .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN"); // 🎉 That's it!
+
+    return builder.Build();
+}
+```
+
+### Advanced Setup Options
+
+Need more control? Here are additional setup options:
+
+```
+// With HttpClient configuration
+builder.UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN", httpClient =>
+{
+    httpClient.Timeout = TimeSpan.FromSeconds(30);
+    httpClient.DefaultRequestHeaders.Add("User-Agent", "MyApp/1.0");
+});
+
+// With configuration options
+builder.UseFacebookEvents(options =>
+{
+    options.AppId = "YOUR_APP_ID";
+    options.ClientToken = "YOUR_CLIENT_TOKEN";
+    options.ConfigureHttpClient = httpClient =>
+    {
+        httpClient.Timeout = TimeSpan.FromSeconds(15);
+    };
+});
+```
+
+<details>
+<summary><strong>Manual Setup (if you prefer DIY)</strong></summary>
+
+```
 public static MauiApp CreateMauiApp()
 {
     var builder = MauiApp.CreateBuilder();
     
 #if ANDROID
     builder.Services.AddSingleton<IAdvertiserIdService, 
-        FacebookAppEvents.Platforms.Android.AdvertiserIdService>();
+        Plugin.Maui.FacebookAppEvents.Platforms.Android.AdvertiserIdService>();
 #elif IOS
     builder.Services.AddSingleton<IAdvertiserIdService, 
-        FacebookAppEvents.Platforms.iOS.AdvertiserIdService>();
+        Plugin.Maui.FacebookAppEvents.Platforms.iOS.AdvertiserIdService>();
 #endif
 
     builder.Services.AddSingleton<FacebookAppEventSender>(provider =>
@@ -66,9 +124,14 @@ public static MauiApp CreateMauiApp()
 
     return builder.Build();
 }
-Examples
-Track a Purchase
-csharp
+```
+
+</details>
+
+## Examples
+
+### Track a Purchase
+```
 public async Task OnOrderCompleted(Order order)
 {
     var items = order.Items.Select(item => new FacebookContentItem
@@ -85,8 +148,10 @@ public async Task OnOrderCompleted(Order order)
 
     await _eventSender.SendEventsAsync(purchaseEvent);
 }
-Track Add to Cart
-csharp
+```
+
+### Track Add to Cart
+```
 var items = new List<FacebookContentItem>
 {
     new() { Id = "product-123", Quantity = 1 }
@@ -94,17 +159,23 @@ var items = new List<FacebookContentItem>
 
 var event = FacebookAppEventFactory.CreateAddToCartEvent(items);
 await _eventSender.SendEventsAsync(event);
-Track Screen Views
-csharp
+```
+
+### Track Screen Views
+```
 // In your page's OnAppearing or constructor
 var screenEvent = FacebookAppEventFactory.CreateScreenViewEvent("ProductDetails");
 await _eventSender.SendEventsAsync(screenEvent);
-Track User Registration
-csharp
+```
+
+### Track User Registration
+```
 var loginEvent = FacebookAppEventFactory.CreateLoginEvent();
 await _eventSender.SendEventsAsync(loginEvent);
-Custom Events
-csharp
+```
+
+### Custom Events
+```
 var customEvent = FacebookAppEventFactory.CreateCustomEvent(
     eventName: "video_completed",
     contentType: "media",
@@ -115,19 +186,24 @@ var customEvent = FacebookAppEventFactory.CreateCustomEvent(
 );
 
 await _eventSender.SendEventsAsync(customEvent);
-Send Multiple Events
-csharp
+```
+
+### Send Multiple Events
+```
 // More efficient than sending one by one
 await _eventSender.SendEventsAsync(screenEvent, addToCartEvent, purchaseEvent);
-Don't Like Dependency Injection?
+```
+
+## Don't Like Dependency Injection?
+
 Fair enough. You can create everything manually:
 
-csharp
+```
 IAdvertiserIdService advertiserService;
 #if ANDROID
-advertiserService = new FacebookAppEvents.Platforms.Android.AdvertiserIdService();
+advertiserService = new Plugin.Maui.FacebookAppEvents.Platforms.Android.AdvertiserIdService();
 #elif IOS
-advertiserService = new FacebookAppEvents.Platforms.iOS.AdvertiserIdService();
+advertiserService = new Plugin.Maui.FacebookAppEvents.Platforms.iOS.AdvertiserIdService();
 #endif
 
 var sender = new FacebookAppEventSender(
@@ -139,81 +215,80 @@ var sender = new FacebookAppEventSender(
 
 var event = FacebookAppEventFactory.CreatePurchaseEvent(items, 99.99, "USD");
 await sender.SendEventsAsync(event);
-Privacy
+```
+
+## Privacy
+
 This library respects user privacy:
 
-iOS 14+: Shows the App Tracking Transparency dialog automatically
-
-Android: Checks if user has limited ad tracking
-
-Both: If users opt out, sends empty advertiser IDs and marks tracking as disabled
+- **iOS 14+**: Shows the App Tracking Transparency dialog automatically
+- **Android**: Checks if user has limited ad tracking
+- **Both**: If users opt out, sends empty advertiser IDs and marks tracking as disabled
 
 No sketchy stuff, no personal data without consent.
 
-Troubleshooting
-Events not showing up in Facebook?
+## Troubleshooting
 
-Check your App ID and Client Token (classic mistake)
+**Events not showing up in Facebook?**
+- Check your App ID and Client Token (classic mistake)
+- Events take 15-20 minutes to appear in Facebook's dashboard
+- Test on a real device, not simulator
 
-Events take 15-20 minutes to appear in Facebook's dashboard
+**iOS permission issues?**
+- Make sure the ATT description is in Info.plist
+- Permission dialog only shows once per app install
+- Need iOS 14+ for ATT
 
-Test on a real device, not simulator
+**Android advertising ID not working?**
+- Verify AD_ID permission is in AndroidManifest.xml
+- Update Google Play Services on your test device
+- Library handles threading automatically (you're welcome)
 
-iOS permission issues?
+## API Reference
 
-Make sure the ATT description is in Info.plist
+### FacebookAppEventFactory Methods
 
-Permission dialog only shows once per app install
+| Method | Purpose |
+|--------|---------|
+| `CreatePurchaseEvent()` | Track completed purchases |
+| `CreateAddToCartEvent()` | Track items added to cart |
+| `CreateRemoveFromCartEvent()` | Track items removed from cart |
+| `CreateScreenViewEvent()` | Track page/screen views |
+| `CreateLoginEvent()` | Track user registration/login |
+| `CreateSearchEvent()` | Track search queries |
+| `CreateCustomEvent()` | Create any custom event |
 
-Need iOS 14+ for ATT
+### FacebookAppEvent Properties
 
-Android advertising ID not working?
+| Property | Type | Description |
+|----------|------|-------------|
+| `EventName` | `string` | Facebook event name (required) |
+| `EventId` | `string` | Unique event identifier |
+| `FbContent` | `List<FacebookContentItem>` | Items involved in event |
+| `FbContentType` | `string` | Content type ("product", "screen", etc.) |
+| `ValueToSum` | `double?` | Monetary value |
+| `FbCurrency` | `string` | Currency code ("USD", "EUR", etc.) |
 
-Verify AD_ID permission is in AndroidManifest.xml
+## Contributing
 
-Update Google Play Services on your test device
-
-Library handles threading automatically (you're welcome)
-
-API Reference
-FacebookAppEventFactory Methods
-Method	Purpose
-CreatePurchaseEvent()	Track completed purchases
-CreateAddToCartEvent()	Track items added to cart
-CreateRemoveFromCartEvent()	Track items removed from cart
-CreateScreenViewEvent()	Track page/screen views
-CreateLoginEvent()	Track user registration/login
-CreateSearchEvent()	Track search queries
-CreateCustomEvent()	Create any custom event
-FacebookAppEvent Properties
-Property	Type	Description
-EventName	string	Facebook event name (required)
-EventId	string	Unique event identifier
-FbContent	List<FacebookContentItem>	Items involved in event
-FbContentType	string	Content type ("product", "screen", etc.)
-ValueToSum	double?	Monetary value
-FbCurrency	string	Currency code ("USD", "EUR", etc.)
-Contributing
 Found a bug? Want to add something? Cool, but let's keep it simple. This library intentionally does one thing well rather than trying to be everything to everyone.
 
-Fork it
+1. Fork it
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-Create your feature branch (git checkout -b fix-something-broken)
+## License
 
-Commit your changes (git commit -am 'Fix the thing')
-
-Push to the branch (git push origin fix-something-broken)
-
-Create a Pull Request
-
-License
 MIT License. Use it however you want.
 
-Support
-🐛 Bug Reports: Create an issue
+## Support
 
-💡 Feature Requests: Start a discussion
+- **Bug Reports**: [Create an issue](../../issues)
+- **Feature Requests**: [Start a discussion](../../discussions)
+- **Documentation**: Check the XML docs in your IDE
 
-📖 Documentation: Check the XML docs in your IDE
+---
 
-Made with coffee and mild annoyance at Facebook's unnecessarily complex SDKs.
+*Made with coffee and mild annoyance at Facebook's unnecessarily complex SDKs.*
