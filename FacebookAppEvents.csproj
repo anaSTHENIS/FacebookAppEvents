@@ -5,11 +5,12 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<NuGetAudit>true</NuGetAudit>
 
 		<!-- NuGet Package Metadata -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Plugin.Maui.FacebookAppEvents</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>anaSTHENIS</Authors>
 		<Company>anaSTHENIS</Company>
 		<Title>Facebook App Events for .NET MAUI</Title>
