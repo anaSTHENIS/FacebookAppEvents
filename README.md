@@ -240,25 +240,10 @@ MIT License. Use it however you want.
 
 ## Support
 
-- 🐛 **Bug Reports**: [Create an issue](../../issues)
-- 💡 **Feature Requests**: [Start a discussion](../../discussions)
-- 📖 **Documentation**: Check the XML docs in your IDE
+- **Bug Reports**: [Create an issue](../../issues)
+- **Feature Requests**: [Start a discussion](../../discussions)
+- **Documentation**: Check the XML docs in your IDE
 
 ---
 
 *Made with coffee and mild annoyance at Facebook's unnecessarily complex SDKs.*
-```
-
-This README is now properly formatted for GitHub with:
-
-- ✅ Proper markdown syntax
-- ✅ Code blocks with syntax highlighting 
-- ✅ Centered header with badges
-- ✅ Proper heading hierarchy
-- ✅ Tables for API reference
-- ✅ Working internal links
-- ✅ GitHub-specific issue/discussion links
-- ✅ Natural, human tone
-- ✅ Mobile-friendly formatting
-
-Just save this as `README.md` in your repository root and GitHub will render it beautifully!
