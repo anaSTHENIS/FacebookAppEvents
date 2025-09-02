@@ -55,9 +55,52 @@ Add this to `Info.plist`:
 <string>This helps us show you relevant ads and improve the app.</string>
 ```
 
-### Register the Services
+## Quick Setup (Recommended)
 
-In `MauiProgram.cs`:
+The easiest way to get started - just one line in your `MauiProgram.cs`:
+
+```
+public static MauiApp CreateMauiApp()
+{
+    var builder = MauiApp.CreateBuilder();
+    builder
+        .UseMauiApp<App>()
+        .ConfigureFonts(fonts =>
+        {
+            fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+        })
+        .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN"); // 🎉 That's it!
+
+    return builder.Build();
+}
+```
+
+### Advanced Setup Options
+
+Need more control? Here are additional setup options:
+
+```
+// With HttpClient configuration
+builder.UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN", httpClient =>
+{
+    httpClient.Timeout = TimeSpan.FromSeconds(30);
+    httpClient.DefaultRequestHeaders.Add("User-Agent", "MyApp/1.0");
+});
+
+// With configuration options
+builder.UseFacebookEvents(options =>
+{
+    options.AppId = "YOUR_APP_ID";
+    options.ClientToken = "YOUR_CLIENT_TOKEN";
+    options.ConfigureHttpClient = httpClient =>
+    {
+        httpClient.Timeout = TimeSpan.FromSeconds(15);
+    };
+});
+```
+
+<details>
+<summary><strong>Manual Setup (if you prefer DIY)</strong></summary>
 
 ```
 public static MauiApp CreateMauiApp()
@@ -66,10 +109,10 @@ public static MauiApp CreateMauiApp()
     
 #if ANDROID
     builder.Services.AddSingleton<IAdvertiserIdService, 
-        FacebookAppEvents.Platforms.Android.AdvertiserIdService>();
+        Plugin.Maui.FacebookAppEvents.Platforms.Android.AdvertiserIdService>();
 #elif IOS
     builder.Services.AddSingleton<IAdvertiserIdService, 
-        FacebookAppEvents.Platforms.iOS.AdvertiserIdService>();
+        Plugin.Maui.FacebookAppEvents.Platforms.iOS.AdvertiserIdService>();
 #endif
 
     builder.Services.AddSingleton<FacebookAppEventSender>(provider =>
@@ -82,6 +125,8 @@ public static MauiApp CreateMauiApp()
     return builder.Build();
 }
 ```
+
+</details>
 
 ## Examples
 
@@ -156,9 +201,9 @@ Fair enough. You can create everything manually:
 ```
 IAdvertiserIdService advertiserService;
 #if ANDROID
-advertiserService = new FacebookAppEvents.Platforms.Android.AdvertiserIdService();
+advertiserService = new Plugin.Maui.FacebookAppEvents.Platforms.Android.AdvertiserIdService();
 #elif IOS
-advertiserService = new FacebookAppEvents.Platforms.iOS.AdvertiserIdService();
+advertiserService = new Plugin.Maui.FacebookAppEvents.Platforms.iOS.AdvertiserIdService();
 #endif
 
 var sender = new FacebookAppEventSender(
