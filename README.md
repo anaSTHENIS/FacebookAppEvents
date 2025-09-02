@@ -1,6 +1,5 @@
 # Plugin.Maui.FacebookAppEvents
 
-<div align="center">
 
 [![NuGet](https://img.shields.io/nuget/v/Plugin.Maui.FacebookAppEvents.svg)](https://www.nuget.org/packages/Plugin.Maui.FacebookAppEvents/)
 [![Downloads](https://img.shields.io/nuget/dt/Plugin.Maui.FacebookAppEvents)](https://www.nuget.org/packages/Plugin.Maui.FacebookAppEvents/)
@@ -10,8 +9,6 @@
 *Because implementing Facebook App Events shouldn't be this hard*
 
 [Get Started](#installation) • [Examples](#examples) • [Troubleshooting](#troubleshooting)
-
-</div>
 
 ---
 
