@@ -548,6 +548,7 @@ secrets.json
 *.swp
 *.swo
 
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -569,5 +570,5 @@ ehthumbs.db
 !LICENSE
 !README.md
 !*.md
-!icon.png
+!nugetfb.png
 !logo.png
