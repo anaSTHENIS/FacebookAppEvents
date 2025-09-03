@@ -66,7 +66,7 @@ public static MauiApp CreateMauiApp()
         {
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
         })
-        .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN"); // 🎉 That's it!
+        .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN");
 
     return builder.Build();
 }
@@ -143,7 +143,7 @@ public async Task OnOrderCompleted(Order order)
         "USD"
     );
 
-    await _eventSender.SendEventsAsync(purchaseEvent);
+    FacebookAppEventSender.SendEventsAsync(purchaseEvent);
 }
 ```
 
@@ -155,20 +155,20 @@ var items = new List<FacebookContentItem>
 };
 
 var event = FacebookAppEventFactory.CreateAddToCartEvent(items);
-await _eventSender.SendEventsAsync(event);
+FacebookAppEventSender.SendEventsAsync(event);
 ```
 
 ### Track Screen Views
 ```
 // In your page's OnAppearing or constructor
 var screenEvent = FacebookAppEventFactory.CreateScreenViewEvent("ProductDetails");
-await _eventSender.SendEventsAsync(screenEvent);
+FacebookAppEventSender.SendEventsAsync(screenEvent);
 ```
 
 ### Track User Registration
 ```
 var loginEvent = FacebookAppEventFactory.CreateLoginEvent();
-await _eventSender.SendEventsAsync(loginEvent);
+FacebookAppEventSender.SendEventsAsync(loginEvent);
 ```
 
 ### Custom Events
@@ -182,13 +182,18 @@ var customEvent = FacebookAppEventFactory.CreateCustomEvent(
     }
 );
 
-await _eventSender.SendEventsAsync(customEvent);
+FacebookAppEventSender.SendEventsAsync(customEvent);
 ```
 
 ### Send Multiple Events
 ```
 // More efficient than sending one by one
-await _eventSender.SendEventsAsync(screenEvent, addToCartEvent, purchaseEvent);
+FacebookAppEventSender.SendEventsAsync(screenEvent, addToCartEvent, purchaseEvent);
+```
+
+### Static API Fire-and-Forget
+```
+FacebookAppEventSender.SendEventsAsync(FacebookAppEventFactory.CreateScreenViewEvent(nameof(AppSettingsPage)));
 ```
 
 ## Don't Like Dependency Injection?
@@ -211,7 +216,7 @@ var sender = new FacebookAppEventSender(
 );
 
 var event = FacebookAppEventFactory.CreatePurchaseEvent(items, 99.99, "USD");
-await sender.SendEventsAsync(event);
+FacebookAppEventSender.SendEventsAsync(event);
 ```
 
 ## Privacy
@@ -230,6 +235,7 @@ No sketchy stuff, no personal data without consent.
 - Check your App ID and Client Token (classic mistake)
 - Events take 15-20 minutes to appear in Facebook's dashboard
 - Test on a real device, not simulator
+- Ensure Privacy permissions in iOS `Info.plist` and Android `AndroidManifest.xml`
 
 **iOS permission issues?**
 - Make sure the ATT description is in Info.plist
@@ -242,6 +248,10 @@ No sketchy stuff, no personal data without consent.
 - Library handles threading automatically (you're welcome)
 
 ## API Reference
+| Method | Purpose |
+|--------|---------|
+| `SendEventsAsync(params FacebookAppEvent[] events)` | Static fire-and-forget method |
+| `SendEventsAsync(string advertiserId, bool trackingEnabled, params FacebookAppEvent[] events)` | Manual advertiser ID usage |
 
 ### FacebookAppEventFactory Methods
 

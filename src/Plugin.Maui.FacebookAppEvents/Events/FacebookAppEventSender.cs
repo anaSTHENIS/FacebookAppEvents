@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
+﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Models;
+using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace FacebookAppEvents.src
+namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
 {
     /// <summary>
     /// Enhanced helper class to send Facebook App Events with automatic advertiser ID handling.
@@ -16,7 +12,22 @@ namespace FacebookAppEvents.src
         private readonly HttpClient _httpClient;
         private readonly string _appId;
         private readonly string _clientToken;
-        private readonly IAdvertiserIdService? _advertiserIdService;
+        private readonly IAdvertiserIdService _advertiserIdService;
+
+        // Static instance for easy access
+        public static FacebookAppEventSender Instance { get; internal set; }
+
+        /// <summary>
+        /// Static method for easy fire-and-forget event sending.
+        /// </summary>
+        /// <param name="events">The array of FacebookAppEvent to send.</param>
+        public static void SendEvents(params FacebookAppEvent[] events)  // ⬅️ Άλλαξε το όνομα
+        {
+            if (Instance == null)
+                throw new InvalidOperationException("FacebookAppEventSender not initialized. Make sure you called UseFacebookEvents() in MauiProgram.cs");
+
+            _ = Instance.SendEventsAsync(events); // Fire and forget
+        }
 
         /// <summary>
         /// Initializes a new instance with manual advertiser ID handling.
@@ -29,6 +40,9 @@ namespace FacebookAppEvents.src
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _appId = appId ?? throw new ArgumentNullException(nameof(appId));
             _clientToken = clientToken ?? throw new ArgumentNullException(nameof(clientToken));
+
+            // Set as static instance for easy access
+            Instance = this;
         }
 
         /// <summary>
@@ -53,10 +67,8 @@ namespace FacebookAppEvents.src
         {
             if (_advertiserIdService == null)
                 throw new InvalidOperationException("IAdvertiserIdService must be provided to use automatic advertiser ID retrieval.");
-
-            string? advertiserId = await _advertiserIdService.GetAdvertiserIdAsync();
+            string advertiserId = await _advertiserIdService.GetAdvertiserIdAsync();
             bool trackingEnabled = await _advertiserIdService.IsTrackingEnabledAsync();
-
             return await SendEventsAsync(advertiserId ?? string.Empty, trackingEnabled, events);
         }
 
@@ -71,30 +83,31 @@ namespace FacebookAppEvents.src
         {
             if (events == null || events.Length == 0)
                 throw new ArgumentNullException(nameof(events), "At least one FacebookAppEvent must be provided.");
+<<<<<<< HEAD:src/FacebookAppEventSender.cs
 
-            var url = $"https://graph.facebook.com/v17.0/{_appId}/activities";
+            var url = $"https://graph.facebook.com/v23.0/{_appId}/activities";
 
+=======
+            var url = $"https://graph.facebook.com/v23.0/{_appId}/activities";
+>>>>>>> 29c99448488e1286b16e7c0bbd7f5e21f03d13e3:src/Plugin.Maui.FacebookAppEvents/Events/FacebookAppEventSender.cs
             var parameters = new Dictionary<string, string>
-            {
-                { "event", "CUSTOM_APP_EVENTS" },
-                { "app_id", _appId },
-                { "client_token", _clientToken },
-                { "advertiser_id", advertiserId ?? string.Empty },
-                { "advertiser_tracking_enabled", advertiserTrackingEnabled ? "1" : "0" },
-                { "application_tracking_enabled", advertiserTrackingEnabled ? "1" : "0" },
-                { "custom_events", JsonSerializer.Serialize(events) }
-            };
-
+        {
+            { "event", "CUSTOM_APP_EVENTS" },
+            { "app_id", _appId },
+            { "client_token", _clientToken },
+            { "advertiser_id", advertiserId ?? string.Empty },
+            { "advertiser_tracking_enabled", advertiserTrackingEnabled ? "1" : "0" },
+            { "application_tracking_enabled", advertiserTrackingEnabled ? "1" : "0" },
+            { "custom_events", JsonSerializer.Serialize(events) }
+        };
             using var content = new FormUrlEncodedContent(parameters);
             using var response = await _httpClient.PostAsync(url, content);
-
             if (!response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine($"Facebook API Error: {response.StatusCode} - {responseContent}");
                 return false;
             }
-
             return true;
         }
     }
