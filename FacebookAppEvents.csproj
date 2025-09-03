@@ -63,7 +63,7 @@
 
 	<!-- Android-specific dependencies -->
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
-		<PackageReference Include="Xamarin.GooglePlayServices.Ads.Identifier" Version="118.2.0.4" />
+		<PackageReference Include="Xamarin.GooglePlayServices.Ads.Identifier" Version="118.2.0.3" />
 	</ItemGroup>
 
 	<!-- Include package assets -->
