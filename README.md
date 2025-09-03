@@ -66,7 +66,7 @@ public static MauiApp CreateMauiApp()
         {
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
         })
-        .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN"); // 🎉 That's it!
+        .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN");
 
     return builder.Build();
 }
