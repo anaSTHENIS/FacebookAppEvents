@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppEventApp.MainPage"
+             Title="Facebook Events Sample">
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+
+            <Image Source="dotnet_bot.png" HeightRequest="185" Aspect="AspectFit" />
+
+            <Label x:Name="WelcomeLabel" 
+                   Text="Facebook App Events Demo"
+                   FontSize="32"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Test different Facebook events using the buttons below"
+                   FontSize="18"
+                   HorizontalOptions="Center" />
+
+            <!-- Screen View Events -->
+            <Button x:Name="ScreenViewBtn"
+                    Text="Track Screen View"
+                    BackgroundColor="#1877F2"
+                    TextColor="White"
+                    Clicked="OnScreenViewClicked" />
+
+            <!-- Purchase Events -->
+            <Button x:Name="PurchaseBtn"
+                    Text="Track Purchase"
+                    BackgroundColor="#42B883"
+                    TextColor="White"
+                    Clicked="OnPurchaseClicked" />
+
+            <!-- Add to Cart Events -->
+            <Button x:Name="AddToCartBtn"
+                    Text="Track Add to Cart"
+                    BackgroundColor="#FF6B35"
+                    TextColor="White"
+                    Clicked="OnAddToCartClicked" />
+
+            <!-- Login Events -->
+            <Button x:Name="LoginBtn"
+                    Text="Track User Login"
+                    BackgroundColor="#6C5CE7"
+                    TextColor="White"
+                    Clicked="OnLoginClicked" />
+
+            <!-- Search Events -->
+            <Button x:Name="SearchBtn"
+                    Text="Track Search"
+                    BackgroundColor="#00B894"
+                    TextColor="White"
+                    Clicked="OnSearchClicked" />
+
+            <!-- Custom Events -->
+            <Button x:Name="CustomBtn"
+                    Text="Track Custom Event"
+                    BackgroundColor="#E17055"
+                    TextColor="White"
+                    Clicked="OnCustomEventClicked" />
+
+            <!-- Multiple Events -->
+            <Button x:Name="MultipleBtn"
+                    Text="Track Multiple Events"
+                    BackgroundColor="#636E72"
+                    TextColor="White"
+                    Clicked="OnMultipleEventsClicked" />
+
+            <Label x:Name="StatusLabel"
+                   Text="Ready to track events!"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   TextColor="Gray" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
