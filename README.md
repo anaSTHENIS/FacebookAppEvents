@@ -143,7 +143,7 @@ public async Task OnOrderCompleted(Order order)
         "USD"
     );
 
-    FacebookAppEventSender.SendEvents(purchaseEvent);
+    FacebookAppEventSender.SendEventsAsync(purchaseEvent);
 }
 ```
 
@@ -155,20 +155,20 @@ var items = new List<FacebookContentItem>
 };
 
 var event = FacebookAppEventFactory.CreateAddToCartEvent(items);
-FacebookAppEventSender.SendEvents(event);
+FacebookAppEventSender.SendEventsAsync(event);
 ```
 
 ### Track Screen Views
 ```
 // In your page's OnAppearing or constructor
 var screenEvent = FacebookAppEventFactory.CreateScreenViewEvent("ProductDetails");
-FacebookAppEventSender.SendEvents(screenEvent);
+FacebookAppEventSender.SendEventsAsync(screenEvent);
 ```
 
 ### Track User Registration
 ```
 var loginEvent = FacebookAppEventFactory.CreateLoginEvent();
-FacebookAppEventSender.SendEvents(loginEvent);
+FacebookAppEventSender.SendEventsAsync(loginEvent);
 ```
 
 ### Custom Events
@@ -182,18 +182,18 @@ var customEvent = FacebookAppEventFactory.CreateCustomEvent(
     }
 );
 
-FacebookAppEventSender.SendEvents(customEvent);
+FacebookAppEventSender.SendEventsAsync(customEvent);
 ```
 
 ### Send Multiple Events
 ```
 // More efficient than sending one by one
-FacebookAppEventSender.SendEvents(screenEvent, addToCartEvent, purchaseEvent);
+FacebookAppEventSender.SendEventsAsync(screenEvent, addToCartEvent, purchaseEvent);
 ```
 
 ### Static API Fire-and-Forget
 ```
-FacebookAppEventSender.SendEvents(FacebookAppEventFactory.CreateScreenViewEvent(nameof(AppSettingsPage)));
+FacebookAppEventSender.SendEventsAsync(FacebookAppEventFactory.CreateScreenViewEvent(nameof(AppSettingsPage)));
 ```
 
 ## Don't Like Dependency Injection?
@@ -216,7 +216,7 @@ var sender = new FacebookAppEventSender(
 );
 
 var event = FacebookAppEventFactory.CreatePurchaseEvent(items, 99.99, "USD");
-FacebookAppEventSender.SendEvents(event);
+FacebookAppEventSender.SendEventsAsync(event);
 ```
 
 ## Privacy
@@ -250,8 +250,7 @@ No sketchy stuff, no personal data without consent.
 ## API Reference
 | Method | Purpose |
 |--------|---------|
-| `SendEvents(params FacebookAppEvent[] events)` | Static fire-and-forget method |
-| `CreateAddToCartEvent(params FacebookAppEvent[] events)` | Async method with result |
+| `SendEventsAsync(params FacebookAppEvent[] events)` | Static fire-and-forget method |
 | `SendEventsAsync(string advertiserId, bool trackingEnabled, params FacebookAppEvent[] events)` | Manual advertiser ID usage |
 
 ### FacebookAppEventFactory Methods
