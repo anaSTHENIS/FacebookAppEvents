@@ -1,9 +1,7 @@
 ﻿using AppTrackingTransparency;
 using AdSupport;
 using Foundation;
-using System;
-using System.Threading.Tasks;
-using FacebookAppEvents.src;
+using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services;
 
 namespace FacebookAppEvents.Platforms.iOS
 {

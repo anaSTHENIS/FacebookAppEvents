@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace FacebookAppEvents
+namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Models
 {
     /// <summary>
     /// Represents a Facebook App Event that can be sent via the Facebook Graph API.
@@ -29,14 +29,14 @@ namespace FacebookAppEvents
         /// Optional, depending on the event type. Used for purchase, add to cart, etc.
         /// </summary>
         [JsonPropertyName("fb_content")]
-        public List<FacebookContentItem>? FbContent { get; set; }
+        public List<FacebookContentItem> FbContent { get; set; }
 
         /// <summary>
         /// The type of content being tracked (e.g., "product", "screen", "user_action").
         /// Optional field that helps categorize the event content.
         /// </summary>
         [JsonPropertyName("fb_content_type")]
-        public string? FbContentType { get; set; }
+        public string FbContentType { get; set; }
 
         /// <summary>
         /// The monetary value associated with this event (e.g., purchase amount).
@@ -50,7 +50,7 @@ namespace FacebookAppEvents
         /// Optional. Should be a 3-letter ISO 4217 currency code.
         /// </summary>
         [JsonPropertyName("fb_currency")]
-        public string? FbCurrency { get; set; }
+        public string FbCurrency { get; set; }
     }
 
     /// <summary>
