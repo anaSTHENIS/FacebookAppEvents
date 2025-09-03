@@ -7,7 +7,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
     /// <summary>
     /// Enhanced helper class to send Facebook App Events with automatic advertiser ID handling.
     /// </summary>
-    public static class FacebookAppEventSender
+    public class FacebookAppEventSender
     {
         private readonly HttpClient _httpClient;
         private readonly string _appId;
@@ -21,7 +21,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// Static method for easy fire-and-forget event sending.
         /// </summary>
         /// <param name="events">The array of FacebookAppEvent to send.</param>
-        public static void SendEvents(params FacebookAppEvent[] events)
+        public static void SendEvents(params FacebookAppEvent[] events)  // ⬅️ Άλλαξε το όνομα
         {
             if (Instance == null)
                 throw new InvalidOperationException("FacebookAppEventSender not initialized. Make sure you called UseFacebookEvents() in MauiProgram.cs");
@@ -35,7 +35,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// <param name="httpClient">An HttpClient instance for making API calls.</param>
         /// <param name="appId">Facebook App ID.</param>
         /// <param name="clientToken">Facebook Client Token.</param>
-        public static FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken)
+        public FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _appId = appId ?? throw new ArgumentNullException(nameof(appId));
@@ -52,7 +52,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// <param name="appId">Facebook App ID.</param>
         /// <param name="clientToken">Facebook Client Token.</param>
         /// <param name="advertiserIdService">Platform-specific advertiser ID service.</param>
-        public static FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken, IAdvertiserIdService advertiserIdService)
+        public FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken, IAdvertiserIdService advertiserIdService)
             : this(httpClient, appId, clientToken)
         {
             _advertiserIdService = advertiserIdService ?? throw new ArgumentNullException(nameof(advertiserIdService));
@@ -63,7 +63,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// </summary>
         /// <param name="events">The array of FacebookAppEvent to send.</param>
         /// <returns>Task returning true if successful; otherwise false.</returns>
-        public static async Task<bool> SendEventsAsync(params FacebookAppEvent[] events)
+        public async Task<bool> SendEventsAsync(params FacebookAppEvent[] events)
         {
             if (_advertiserIdService == null)
                 throw new InvalidOperationException("IAdvertiserIdService must be provided to use automatic advertiser ID retrieval.");
@@ -79,7 +79,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// <param name="advertiserTrackingEnabled">Whether advertiser tracking is enabled.</param>
         /// <param name="events">The array of FacebookAppEvent to send.</param>
         /// <returns>Task returning true if successful; otherwise false.</returns>
-        public static async Task<bool> SendEventsAsync(string advertiserId, bool advertiserTrackingEnabled, params FacebookAppEvent[] events)
+        public async Task<bool> SendEventsAsync(string advertiserId, bool advertiserTrackingEnabled, params FacebookAppEvent[] events)
         {
             if (events == null || events.Length == 0)
                 throw new ArgumentNullException(nameof(events), "At least one FacebookAppEvent must be provided.");
