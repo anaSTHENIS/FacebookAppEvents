@@ -143,7 +143,7 @@ public async Task OnOrderCompleted(Order order)
         "USD"
     );
 
-    FacebookAppEventSender.SendEvents(purchaseEvent);
+    await _eventSender.SendEventsAsync(purchaseEvent);
 }
 ```
 
@@ -155,20 +155,20 @@ var items = new List<FacebookContentItem>
 };
 
 var event = FacebookAppEventFactory.CreateAddToCartEvent(items);
-FacebookAppEventSender.SendEvents(event);
+await _eventSender.SendEventsAsync(event);
 ```
 
 ### Track Screen Views
 ```
 // In your page's OnAppearing or constructor
 var screenEvent = FacebookAppEventFactory.CreateScreenViewEvent("ProductDetails");
-FacebookAppEventSender.SendEvents(screenEvent);
+await _eventSender.SendEventsAsync(screenEvent);
 ```
 
 ### Track User Registration
 ```
 var loginEvent = FacebookAppEventFactory.CreateLoginEvent();
-FacebookAppEventSender.SendEvents(loginEvent);
+await _eventSender.SendEventsAsync(loginEvent);
 ```
 
 ### Custom Events
@@ -182,18 +182,13 @@ var customEvent = FacebookAppEventFactory.CreateCustomEvent(
     }
 );
 
-FacebookAppEventSender.SendEvents(customEvent);
+await _eventSender.SendEventsAsync(customEvent);
 ```
 
 ### Send Multiple Events
 ```
 // More efficient than sending one by one
-FacebookAppEventSender.SendEvents(screenEvent, addToCartEvent, purchaseEvent);
-```
-
-### Static API Fire-and-Forget
-```
-FacebookAppEventSender.SendEvents(FacebookAppEventFactory.CreateScreenViewEvent(nameof(AppSettingsPage)));
+await _eventSender.SendEventsAsync(screenEvent, addToCartEvent, purchaseEvent);
 ```
 
 ## Don't Like Dependency Injection?
@@ -216,7 +211,7 @@ var sender = new FacebookAppEventSender(
 );
 
 var event = FacebookAppEventFactory.CreatePurchaseEvent(items, 99.99, "USD");
-FacebookAppEventSender.SendEvents(event);
+await sender.SendEventsAsync(event);
 ```
 
 ## Privacy
@@ -235,7 +230,6 @@ No sketchy stuff, no personal data without consent.
 - Check your App ID and Client Token (classic mistake)
 - Events take 15-20 minutes to appear in Facebook's dashboard
 - Test on a real device, not simulator
-- Ensure Privacy permissions in iOS `Info.plist` and Android `AndroidManifest.xml`
 
 **iOS permission issues?**
 - Make sure the ATT description is in Info.plist
@@ -248,11 +242,6 @@ No sketchy stuff, no personal data without consent.
 - Library handles threading automatically (you're welcome)
 
 ## API Reference
-| Method | Purpose |
-|--------|---------|
-| `SendEvents(params FacebookAppEvent[] events)` | Static fire-and-forget method |
-| `CreateAddToCartEvent(params FacebookAppEvent[] events)` | Async method with result |
-| `SendEventsAsync(string advertiserId, bool trackingEnabled, params FacebookAppEvent[] events)` | Manual advertiser ID usage |
 
 ### FacebookAppEventFactory Methods
 

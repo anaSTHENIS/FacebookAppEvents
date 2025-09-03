@@ -1,12 +1,13 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Models;
+﻿using System;
+using System.Collections.Generic;
 
-namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
+namespace FacebookAppEvents
 {
     /// <summary>
     /// Factory class for creating common Facebook App Events with sensible defaults.
     /// Provides pre-configured methods for standard e-commerce and app events.
     /// </summary>
-    internal static class FacebookAppEventFactory
+    public static class FacebookAppEventFactory
     {
         /// <summary>
         /// Creates a purchase event for tracking completed transactions.
@@ -29,7 +30,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
             List<FacebookContentItem> contents,
             double valueToSum,
             string currency,
-            string eventId = null)
+            string? eventId = null)
         {
             return new FacebookAppEvent
             {
@@ -61,7 +62,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// </example>
         public static FacebookAppEvent CreateAddToCartEvent(
             List<FacebookContentItem> contents,
-            string eventId = null,
+            string? eventId = null,
             string contentType = "product",
             string eventName = "fb_mobile_add_to_cart")
         {
@@ -84,7 +85,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// <returns>A FacebookAppEvent representing items removed from cart.</returns>
         public static FacebookAppEvent CreateRemoveFromCartEvent(
             List<FacebookContentItem> contents,
-            string eventId = null,
+            string? eventId = null,
             string contentType = "product",
             string eventName = "fb_mobile_remove_from_cart")
         {
@@ -112,7 +113,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// </example>
         public static FacebookAppEvent CreateScreenViewEvent(
             string screenName,
-            string eventId = null,
+            string? eventId = null,
             string contentType = "screen",
             string eventName = "fb_mobile_content_view")
         {
@@ -140,7 +141,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// </code>
         /// </example>
         public static FacebookAppEvent CreateLoginEvent(
-            string eventId = null,
+            string? eventId = null,
             string eventName = "fb_mobile_complete_registration")
         {
             return new FacebookAppEvent
@@ -160,7 +161,7 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// <returns>A FacebookAppEvent representing a search action.</returns>
         public static FacebookAppEvent CreateSearchEvent(
             string searchString,
-            string eventId = null,
+            string? eventId = null,
             string contentType = "search",
             string eventName = "fb_mobile_search")
         {
@@ -202,11 +203,11 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         /// </example>
         public static FacebookAppEvent CreateCustomEvent(
             string eventName,
-            string eventId = null,
-            string contentType = null,
-            List<FacebookContentItem> contents = null,
+            string? eventId = null,
+            string? contentType = null,
+            List<FacebookContentItem>? contents = null,
             double? valueToSum = null,
-            string currency = null)
+            string? currency = null)
         {
             if (string.IsNullOrWhiteSpace(eventName))
                 throw new ArgumentException("Event name cannot be null or empty.", nameof(eventName));

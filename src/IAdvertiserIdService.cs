@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services
+namespace FacebookAppEvents.src
 {
     /// <summary>
     /// Interface for retrieving platform-specific advertising identifiers.

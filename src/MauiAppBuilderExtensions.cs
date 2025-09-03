@@ -1,7 +1,10 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events;
-using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Extensions
+namespace FacebookAppEvents.src
 {
     /// <summary>
     /// Extension methods for MauiAppBuilder to easily register FacebookAppEvents services.

@@ -1,5 +1,7 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services;
+﻿using FacebookAppEvents.src;
 using Google.Ads.Identifier;
+using System;
+using System.Threading.Tasks;
 
 namespace FacebookAppEvents.Platforms.Android
 {
