@@ -1,7 +1,7 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services;
+﻿using Plugin.Maui.FacebookAppEvents.Services;
 using Google.Ads.Identifier;
 
-namespace FacebookAppEvents.Platforms.Android
+namespace Plugin.Maui.FacebookAppEvents.Platforms.Android
 {
     /// <summary>
     /// Android implementation of IAdvertiserIdService using Google Advertising ID (GAID).

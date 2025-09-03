@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Models
+namespace Plugin.Maui.FacebookAppEvents.Models
 {
     /// <summary>
     /// Represents a Facebook App Event that can be sent via the Facebook Graph API.

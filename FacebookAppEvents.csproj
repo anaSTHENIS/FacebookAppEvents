@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net9.0-android;net9.0-ios</TargetFrameworks>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -10,10 +10,14 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 
+		<!-- This is the key setting -->
+		<RootNamespace>Plugin.Maui.FacebookAppEvents</RootNamespace>
+		<AssemblyName>Plugin.Maui.FacebookAppEvents</AssemblyName>
+		
 		<!-- NuGet Package Metadata -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Plugin.Maui.FacebookAppEvents</PackageId>
-		<Version>1.0.3</Version>
+		<Version>1.1.0</Version>
 		<IsPackable>True</IsPackable>
 		<Authors>anaSTHENIS</Authors>
 		<Company>anaSTHENIS</Company>
@@ -35,13 +39,31 @@
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<!-- .NET 8 Dependencies -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android' OR '$(TargetFramework)' == 'net8.0-ios'">
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+	</ItemGroup>
+
+	<!-- .NET 9 Dependencies -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android' OR '$(TargetFramework)' == 'net9.0-ios'">
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.100" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.100" />
+	</ItemGroup>
+
+	<!-- Common Dependencies (all versions) -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
 	</ItemGroup>
 
 	<!-- Android-specific dependencies -->
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
 		<PackageReference Include="Xamarin.GooglePlayServices.Ads.Identifier" Version="118.2.0.3" />
+	</ItemGroup>
+
+	<!-- Android-specific dependencies -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+		<PackageReference Include="Xamarin.GooglePlayServices.Ads.Identifier" Version="118.2.0.4" />
 	</ItemGroup>
 
 	<!-- Include package assets -->

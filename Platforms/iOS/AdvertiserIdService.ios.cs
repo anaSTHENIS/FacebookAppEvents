@@ -1,9 +1,9 @@
 ﻿using AppTrackingTransparency;
 using AdSupport;
 using Foundation;
-using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services;
+using Plugin.Maui.FacebookAppEvents.Services;
 
-namespace FacebookAppEvents.Platforms.iOS
+namespace Plugin.Maui.FacebookAppEvents.Platforms.iOS
 {
     /// <summary>
     /// iOS implementation of IAdvertiserIdService using IDFA with App Tracking Transparency.

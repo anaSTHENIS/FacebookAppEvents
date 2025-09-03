@@ -1,4 +1,4 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Extensions;
+﻿using Plugin.Maui.FacebookAppEvents.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace AppEventApp

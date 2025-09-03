@@ -1,8 +1,8 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Models;
-using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Services;
+﻿using Plugin.Maui.FacebookAppEvents.Models;
+using Plugin.Maui.FacebookAppEvents.Services;
 using System.Text.Json;
 
-namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
+namespace Plugin.Maui.FacebookAppEvents.Events
 {
     /// <summary>
     /// Enhanced helper class to send Facebook App Events with automatic advertiser ID handling.

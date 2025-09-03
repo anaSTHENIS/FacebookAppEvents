@@ -1,6 +1,6 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Models;
+﻿using Plugin.Maui.FacebookAppEvents.Models;
 
-namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
+namespace Plugin.Maui.FacebookAppEvents.Events
 {
     /// <summary>
     /// Factory class for creating common Facebook App Events with sensible defaults.

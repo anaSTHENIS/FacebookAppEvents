@@ -1,5 +1,5 @@
-﻿using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events;
-using FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Models;
+﻿using Plugin.Maui.FacebookAppEvents.Events;
+using Plugin.Maui.FacebookAppEvents.Models;
 
 namespace AppEventApp
 {
