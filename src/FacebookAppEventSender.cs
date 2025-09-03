@@ -11,7 +11,7 @@ namespace FacebookAppEvents.src
     /// <summary>
     /// Enhanced helper class to send Facebook App Events with automatic advertiser ID handling.
     /// </summary>
-    public class FacebookAppEventSender
+    public static class FacebookAppEventSender
     {
         private readonly HttpClient _httpClient;
         private readonly string _appId;
@@ -24,7 +24,7 @@ namespace FacebookAppEvents.src
         /// <param name="httpClient">An HttpClient instance for making API calls.</param>
         /// <param name="appId">Facebook App ID.</param>
         /// <param name="clientToken">Facebook Client Token.</param>
-        public FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken)
+        public static FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _appId = appId ?? throw new ArgumentNullException(nameof(appId));
@@ -38,7 +38,7 @@ namespace FacebookAppEvents.src
         /// <param name="appId">Facebook App ID.</param>
         /// <param name="clientToken">Facebook Client Token.</param>
         /// <param name="advertiserIdService">Platform-specific advertiser ID service.</param>
-        public FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken, IAdvertiserIdService advertiserIdService)
+        public static FacebookAppEventSender(HttpClient httpClient, string appId, string clientToken, IAdvertiserIdService advertiserIdService)
             : this(httpClient, appId, clientToken)
         {
             _advertiserIdService = advertiserIdService ?? throw new ArgumentNullException(nameof(advertiserIdService));
@@ -49,7 +49,7 @@ namespace FacebookAppEvents.src
         /// </summary>
         /// <param name="events">The array of FacebookAppEvent to send.</param>
         /// <returns>Task returning true if successful; otherwise false.</returns>
-        public async Task<bool> SendEventsAsync(params FacebookAppEvent[] events)
+        public static async Task<bool> SendEventsAsync(params FacebookAppEvent[] events)
         {
             if (_advertiserIdService == null)
                 throw new InvalidOperationException("IAdvertiserIdService must be provided to use automatic advertiser ID retrieval.");
@@ -67,7 +67,7 @@ namespace FacebookAppEvents.src
         /// <param name="advertiserTrackingEnabled">Whether advertiser tracking is enabled.</param>
         /// <param name="events">The array of FacebookAppEvent to send.</param>
         /// <returns>Task returning true if successful; otherwise false.</returns>
-        public async Task<bool> SendEventsAsync(string advertiserId, bool advertiserTrackingEnabled, params FacebookAppEvent[] events)
+        public static async Task<bool> SendEventsAsync(string advertiserId, bool advertiserTrackingEnabled, params FacebookAppEvent[] events)
         {
             if (events == null || events.Length == 0)
                 throw new ArgumentNullException(nameof(events), "At least one FacebookAppEvent must be provided.");
