@@ -83,13 +83,9 @@ namespace FacebookAppEvents.src.Plugin.Maui.FacebookAppEvents.Events
         {
             if (events == null || events.Length == 0)
                 throw new ArgumentNullException(nameof(events), "At least one FacebookAppEvent must be provided.");
-<<<<<<< HEAD:src/FacebookAppEventSender.cs
 
             var url = $"https://graph.facebook.com/v23.0/{_appId}/activities";
-
-=======
-            var url = $"https://graph.facebook.com/v23.0/{_appId}/activities";
->>>>>>> 29c99448488e1286b16e7c0bbd7f5e21f03d13e3:src/Plugin.Maui.FacebookAppEvents/Events/FacebookAppEventSender.cs
+			
             var parameters = new Dictionary<string, string>
         {
             { "event", "CUSTOM_APP_EVENTS" },

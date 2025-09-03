@@ -6,22 +6,15 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<NuGetAudit>true</NuGetAudit>
-<<<<<<< HEAD
-=======
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
->>>>>>> 29c99448488e1286b16e7c0bbd7f5e21f03d13e3
 
 		<!-- NuGet Package Metadata -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Plugin.Maui.FacebookAppEvents</PackageId>
-<<<<<<< HEAD
-		<Version>1.0.2</Version>
-=======
 		<Version>1.0.3</Version>
 		<IsPackable>True</IsPackable>
->>>>>>> 29c99448488e1286b16e7c0bbd7f5e21f03d13e3
 		<Authors>anaSTHENIS</Authors>
 		<Company>anaSTHENIS</Company>
 		<Title>Facebook App Events for .NET MAUI</Title>
