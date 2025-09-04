@@ -1,4 +1,4 @@
-﻿using Plugin.Maui.FacebookAppEvents.Models;
+using Plugin.Maui.FacebookAppEvents.Models;
 
 namespace Plugin.Maui.FacebookAppEvents.Events
 {
@@ -6,7 +6,7 @@ namespace Plugin.Maui.FacebookAppEvents.Events
     /// Factory class for creating common Facebook App Events with sensible defaults.
     /// Provides pre-configured methods for standard e-commerce and app events.
     /// </summary>
-    internal static class FacebookAppEventFactory
+    public static class FacebookAppEventFactory
     {
         /// <summary>
         /// Creates a purchase event for tracking completed transactions.
