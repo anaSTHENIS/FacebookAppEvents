@@ -32,7 +32,7 @@
 		<RepositoryUrl>https://github.com/anaSTHENIS/Plugin.Maui.FacebookAppEvents</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Copyright>Copyright © 2025 anaSTHENIS</Copyright>
-		<PackageReleaseNotes>Initial release with iOS IDFA and Android GAID support, full Facebook App Events API integration.</PackageReleaseNotes>
+		<PackageReleaseNotes>Fix on FacebookAppEventFactory and FacebookAppEventSender</PackageReleaseNotes>
 
 		<!-- Documentation -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
