@@ -1,5 +1,6 @@
 ﻿using Plugin.Maui.FacebookAppEvents.Events;
 using Plugin.Maui.FacebookAppEvents.Models;
+using Plugin.Maui.FacebookAppEvents.Services;
 
 namespace AppEventApp
 {
@@ -35,8 +36,8 @@ namespace AppEventApp
             {
                 var items = new List<FacebookContentItem>
             {
-                new() { Id = "product-123", Quantity = 2, ItemPrice = 29.99 },
-                new() { Id = "product-456", Quantity = 1, ItemPrice = 49.99 }
+                new() { Id = "product-123", Quantity = 2},
+                new() { Id = "product-456", Quantity = 1 }
             };
 
                 FacebookAppEventSender.SendEvents(
@@ -57,7 +58,7 @@ namespace AppEventApp
             {
                 var items = new List<FacebookContentItem>
             {
-                new() { Id = "product-789", Quantity = 1, ItemPrice = 19.99 }
+                new() { Id = "product-789", Quantity = 1 }
             };
 
                 FacebookAppEventSender.SendEvents(

@@ -17,7 +17,7 @@
 		<!-- NuGet Package Metadata -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Plugin.Maui.FacebookAppEvents</PackageId>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 		<IsPackable>True</IsPackable>
 		<Authors>anaSTHENIS</Authors>
 		<Company>anaSTHENIS</Company>
@@ -58,7 +58,7 @@
 
 	<!-- Android-specific dependencies -->
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-		<PackageReference Include="Xamarin.GooglePlayServices.Ads.Identifier" Version="118.2.0.3" />
+		<PackageReference Include="Xamarin.GooglePlayServices.Ads.Identifier" Version="118.2.0.2" />
 	</ItemGroup>
 
 	<!-- Android-specific dependencies -->
