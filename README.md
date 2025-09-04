@@ -7,7 +7,9 @@
 [![.NET](https://img.shields.io/badge/.NET-8.0+-blue.svg)](https://dotnet.microsoft.com/download)
 
 ## update
-*There will be a new version today 1.1.1 witch fixes a lot of issues (currently the main usage of the plugin*
+*There will be a new version today 1.1.1 which fixes a lot of issues 
+(currently the main usage of the plugin)*
+
 
 *Because implementing Facebook App Events shouldn't be this hard*
 
