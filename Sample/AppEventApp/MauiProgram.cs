@@ -1,5 +1,6 @@
-﻿using Plugin.Maui.FacebookAppEvents.Extensions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Plugin.Maui.FacebookAppEvents.Events;
+using Plugin.Maui.FacebookAppEvents.Extensions;
 
 namespace AppEventApp
 {
@@ -15,13 +16,17 @@ namespace AppEventApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
-                .UseFacebookEvents("YOUR_FACEBOOK_APP_ID", "YOUR_FACEBOOK_CLIENT_TOKEN");
+                .UseFacebookEvents("791894660020118", "6238af99756b0a0ed85c3e196709de79");
 
+            var app = builder.Build();
+
+            var facebookSender = app.Services.GetRequiredService<FacebookAppEventSender>();
+            FacebookAppEventSender.InitializeInstance(facebookSender);
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            return app;
         }
     }
 }

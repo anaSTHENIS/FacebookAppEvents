@@ -69,7 +69,13 @@ public static MauiApp CreateMauiApp()
         })
         .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN");
 
-    return builder.Build();
+    //version 1.1.2 +
+    var app = builder.Build();
+
+    var facebookSender = app.Services.GetRequiredService<FacebookAppEventSender>();
+    FacebookAppEventSender.InitializeInstance(facebookSender);
+
+    return app;
 }
 ```
 
@@ -120,7 +126,13 @@ public static MauiApp CreateMauiApp()
         return new FacebookAppEventSender(httpClient, "YOUR_APP_ID", "YOUR_CLIENT_TOKEN", advertiserIdService);
     });
 
-    return builder.Build();
+    //version 1.1.2 +
+    var app = builder.Build();
+
+    var facebookSender = app.Services.GetRequiredService<FacebookAppEventSender>();
+    FacebookAppEventSender.InitializeInstance(facebookSender);
+
+    return app;
 }
 ```
 

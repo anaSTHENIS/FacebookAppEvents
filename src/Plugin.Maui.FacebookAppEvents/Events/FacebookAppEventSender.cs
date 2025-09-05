@@ -15,13 +15,19 @@ namespace Plugin.Maui.FacebookAppEvents.Events
         private readonly IAdvertiserIdService _advertiserIdService;
 
         // Static instance for easy access
-        public static FacebookAppEventSender Instance { get; set; }
+        public static FacebookAppEventSender? Instance { get; private set; }
+
+        public static void InitializeInstance(FacebookAppEventSender sender)
+        {
+            if (Instance == null)
+                Instance = sender;
+        }
 
         /// <summary>
         /// Static method for easy fire-and-forget event sending.
         /// </summary>
         /// <param name="events">The array of FacebookAppEvent to send.</param>
-        public void SendEvents(params FacebookAppEvent[] events)  // ⬅️ Άλλαξε το όνομα
+        public static void SendEvents(params FacebookAppEvent[] events)  // ⬅️ Άλλαξε το όνομα
         {
             if (Instance == null)
                 throw new InvalidOperationException("FacebookAppEventSender not initialized. Make sure you called UseFacebookEvents() in MauiProgram.cs");
@@ -40,9 +46,6 @@ namespace Plugin.Maui.FacebookAppEvents.Events
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _appId = appId ?? throw new ArgumentNullException(nameof(appId));
             _clientToken = clientToken ?? throw new ArgumentNullException(nameof(clientToken));
-
-            // Set as static instance for easy access
-            Instance = this;
         }
 
         /// <summary>
@@ -56,7 +59,6 @@ namespace Plugin.Maui.FacebookAppEvents.Events
             : this(httpClient, appId, clientToken)
         {
             _advertiserIdService = advertiserIdService ?? throw new ArgumentNullException(nameof(advertiserIdService));
-            Instance = this;
         }
 
         /// <summary>
