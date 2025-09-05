@@ -168,20 +168,20 @@ var items = new List<FacebookContentItem>
 };
 
 var event = FacebookAppEventFactory.CreateAddToCartEvent(items);
-FacebookAppEventSender.SendEventsAsync(event);
+FacebookAppEventSender.SendEvents(event);
 ```
 
 ### Track Screen Views
 ```
 // In your page's OnAppearing or constructor
 var screenEvent = FacebookAppEventFactory.CreateScreenViewEvent("ProductDetails");
-FacebookAppEventSender.SendEventsAsync(screenEvent);
+FacebookAppEventSender.SendEvents(screenEvent);
 ```
 
 ### Track User Registration
 ```
 var loginEvent = FacebookAppEventFactory.CreateLoginEvent();
-FacebookAppEventSender.SendEventsAsync(loginEvent);
+FacebookAppEventSender.SendEvents(loginEvent);
 ```
 
 ### Custom Events
@@ -195,18 +195,18 @@ var customEvent = FacebookAppEventFactory.CreateCustomEvent(
     }
 );
 
-FacebookAppEventSender.SendEventsAsync(customEvent);
+FacebookAppEventSender.SendEvents(customEvent);
 ```
 
 ### Send Multiple Events
 ```
 // More efficient than sending one by one
-FacebookAppEventSender.SendEventsAsync(screenEvent, addToCartEvent, purchaseEvent);
+FacebookAppEventSender.SendEvents(screenEvent, addToCartEvent, purchaseEvent);
 ```
 
 ### Static API Fire-and-Forget
 ```
-FacebookAppEventSender.SendEventsAsync(FacebookAppEventFactory.CreateScreenViewEvent(nameof(AppSettingsPage)));
+FacebookAppEventSender.SendEvents(FacebookAppEventFactory.CreateScreenViewEvent(nameof(AppSettingsPage)));
 ```
 
 ## Don't Like Dependency Injection?
@@ -229,7 +229,7 @@ var sender = new FacebookAppEventSender(
 );
 
 var event = FacebookAppEventFactory.CreatePurchaseEvent(items, 99.99, "USD");
-FacebookAppEventSender.SendEventsAsync(event);
+FacebookAppEventSender.SendEvents(event);
 ```
 
 ## Privacy
@@ -263,8 +263,7 @@ No sketchy stuff, no personal data without consent.
 ## API Reference
 | Method | Purpose |
 |--------|---------|
-| `SendEventsAsync(params FacebookAppEvent[] events)` | Static fire-and-forget method |
-| `SendEventsAsync(string advertiserId, bool trackingEnabled, params FacebookAppEvent[] events)` | Manual advertiser ID usage |
+| `SendEvents(params FacebookAppEvent[] events)` | Static fire-and-forget method |
 
 ### FacebookAppEventFactory Methods
 
@@ -286,7 +285,7 @@ No sketchy stuff, no personal data without consent.
 | `EventId` | `string` | Unique event identifier |
 | `FbContent` | `List<FacebookContentItem>` | Items involved in event |
 | `FbContentType` | `string` | Content type ("product", "screen", etc.) |
-| `ValueToSum` | `double?` | Monetary value |
+| `ValueToSum` | `decimal?` | Monetary value |
 | `FbCurrency` | `string` | Currency code ("USD", "EUR", etc.) |
 
 ## Contributing
