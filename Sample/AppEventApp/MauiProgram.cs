@@ -16,7 +16,7 @@ namespace AppEventApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
-                .UseFacebookEvents("791894660020118", "6238af99756b0a0ed85c3e196709de79");
+                .UseFacebookEvents("YOUR_APP_ID", "YOUR_CLIENT_TOKEN");
 
             var app = builder.Build();
 
