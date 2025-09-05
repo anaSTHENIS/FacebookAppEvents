@@ -49,7 +49,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.100" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
-		<PackageReference Include="Plugin.Maui.FacebookAppEvents" Version="1.1.3" />
+		<PackageReference Include="Plugin.Maui.FacebookAppEvents" Version="1.1.4" />
 	</ItemGroup>
 
 </Project>
