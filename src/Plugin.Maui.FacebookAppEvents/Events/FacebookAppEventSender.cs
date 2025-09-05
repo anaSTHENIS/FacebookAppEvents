@@ -1,4 +1,4 @@
-﻿using Plugin.Maui.FacebookAppEvents.Models;
+using Plugin.Maui.FacebookAppEvents.Models;
 using Plugin.Maui.FacebookAppEvents.Services;
 using System.Text.Json;
 
@@ -15,7 +15,7 @@ namespace Plugin.Maui.FacebookAppEvents.Events
         private readonly IAdvertiserIdService _advertiserIdService;
 
         // Static instance for easy access
-        public static FacebookAppEventSender Instance { get; internal set; }
+        public static FacebookAppEventSender Instance { get; set; }
 
         /// <summary>
         /// Static method for easy fire-and-forget event sending.
