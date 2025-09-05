@@ -156,7 +156,7 @@ public async Task OnOrderCompleted(Order order)
         "USD"
     );
 
-    FacebookAppEventSender.SendEventsAsync(purchaseEvent);
+    FacebookAppEventSender.SendEvents(purchaseEvent);
 }
 ```
 
