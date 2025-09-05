@@ -41,7 +41,7 @@ namespace AppEventApp
             };
 
                 FacebookAppEventSender.SendEvents(
-                    FacebookAppEventFactory.CreatePurchaseEvent(items, 109.97, "USD")
+                    FacebookAppEventFactory.CreatePurchaseEvent(items, (decimal)109.97, "USD")
                 );
 
                 UpdateStatus("Purchase event sent! Total: $109.97");

@@ -17,7 +17,7 @@
 		<!-- NuGet Package Metadata -->
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Plugin.Maui.FacebookAppEvents</PackageId>
-		<Version>1.1.2</Version>
+		<Version>1.1.3</Version>
 		<IsPackable>True</IsPackable>
 		<Authors>anaSTHENIS</Authors>
 		<Company>anaSTHENIS</Company>
