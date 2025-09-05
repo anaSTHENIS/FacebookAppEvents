@@ -43,7 +43,7 @@ namespace Plugin.Maui.FacebookAppEvents.Models
         /// Optional. Used primarily for conversion value optimization.
         /// </summary>
         [JsonPropertyName("_valueToSum")]
-        public double? ValueToSum { get; set; }
+        public decimal? ValueToSum { get; set; }
 
         /// <summary>
         /// The currency code for the ValueToSum (e.g., "USD", "EUR", "GBP").
@@ -71,6 +71,6 @@ namespace Plugin.Maui.FacebookAppEvents.Models
         /// For example, if 3 units of a product were added to cart, this would be 3.
         /// </summary>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
     }
 }

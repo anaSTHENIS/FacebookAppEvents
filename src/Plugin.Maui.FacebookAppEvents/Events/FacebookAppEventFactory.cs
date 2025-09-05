@@ -27,7 +27,7 @@ namespace Plugin.Maui.FacebookAppEvents.Events
         /// </example>
         public static FacebookAppEvent CreatePurchaseEvent(
             List<FacebookContentItem> contents,
-            double valueToSum,
+            decimal valueToSum,
             string currency,
             string eventId = null)
         {
@@ -205,7 +205,7 @@ namespace Plugin.Maui.FacebookAppEvents.Events
             string eventId = null,
             string contentType = null,
             List<FacebookContentItem> contents = null,
-            double? valueToSum = null,
+            decimal? valueToSum = null,
             string currency = null)
         {
             if (string.IsNullOrWhiteSpace(eventName))
